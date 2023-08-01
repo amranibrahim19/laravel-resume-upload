@@ -1,45 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="_token" content="{{ csrf_token() }}" />
 
-        <title>@yield('title', app_name())</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="_token" content="{{ csrf_token() }}" />
 
-        <!-- Meta -->
-        <meta name="description" content="@yield('meta_description', 'Default Description')">
-        <meta name="author" content="@yield('meta_author', 'Anthony Rappa')">
-        @yield('meta')
+    <title>
+        Laravel Resume
+    </title>
 
-        <!-- Styles -->
-        @yield('before-styles-end')
-        <link href="{{ url('css/bootstrap.min.css') }}" rel="stylesheet">
-        @yield('after-styles-end')
+    <!-- Meta -->
+    <meta name="description" content="@yield('meta_description', 'Default Description')">
+    <meta name="author" content="@yield('meta_author', 'Anthony Rappa')">
+    @yield('meta')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
-    </head>
-    <body id="app-layout">
+    <!-- Styles -->
+    @yield('before-styles-end')
+    <link href="{{ url('css/bootstrap.min.css') }}" rel="stylesheet">
+    @yield('after-styles-end')
 
-        @include('frontend.includes.nav')
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
+</head>
 
-        <div class="container">
-            @include('includes.partials.messages')
-            @yield('content')
-        </div><!-- container -->
+<body id="app-layout">
 
-        <!-- JavaScripts -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="{{asset('js/vendor/jquery/jquery-2.1.4.min.js')}}"><\/script>')</script>
-        {!! Html::script('js/vendor/bootstrap/bootstrap.min.js') !!}
+    @include('frontend.includes.nav')
 
-        @yield('before-scripts-end')
-        {{-- {!! Html::script(elixir('js/frontend.js')) !!} --}}
-        <script src="{{asset('build\js\frontend-a3e1d47905.js')}}"></script>
-        @yield('after-scripts-end')
+    <div class="container">
+        @include('includes.partials.messages')
+        @yield('content')
+    </div><!-- container -->
 
-        @include('includes.partials.ga')
-    </body>
+    <!-- JavaScripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="{{asset('js/vendor/jquery/jquery-2.1.4.min.js')}}"></script>
+    <script src="{{asset('js/vendor/bootstrap/bootstrap.min.js')}}">
+    </script>
+
+    @yield('before-scripts-end')
+    {{-- {!! Html::script(elixir('js/frontend.js')) !!} --}}
+    <script src="{{asset('build\js\frontend-a3e1d47905.js')}}"></script>
+    @yield('after-scripts-end')
+
+    @include('includes.partials.ga')
+</body>
+
 </html>

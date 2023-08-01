@@ -4,7 +4,10 @@ use App\Http\Controllers\Backend\Access\Permission\PermissionController;
 use App\Http\Controllers\Backend\Access\Permission\PermissionGroupController;
 use App\Http\Controllers\Backend\Access\Role\RoleController;
 use App\Http\Controllers\Backend\Access\User\UserController;
+use App\Http\Controllers\Backend\DashboardController as BackendDashboardController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\User\DashboardController;
+use App\Http\Controllers\Frontend\User\ProfileController;
 use App\Http\Controllers\Language\LanguageController;
 use Arcanedev\LogViewer\Http\Controllers\LogViewerController;
 use Illuminate\Support\Facades\Route;
@@ -76,7 +79,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'middleware' => 'ad
          * User Management
          */
         Route::group(['namespace' => 'User'], function () {
-            Route::resource('users', 'UserController', ['except' => ['show']]);
+            Route::resource('users', UserController::class, ['except' => ['show']]);
 
             Route::get('users/deactivated', [UserController::class, 'deactivated'])->name('admin.access.users.deactivated');
             Route::get('users/deleted', [UserController::class, 'deleted'])->name('admin.access.users.deleted');
@@ -123,7 +126,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'middleware' => 'ad
         });
     });
 
-    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('dashboard', [BackendDashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::group([
         'prefix'     => 'log-viewer',
