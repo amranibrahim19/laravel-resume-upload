@@ -115,7 +115,7 @@ return [
 
     'key' => env('APP_KEY'),
 
-    'cipher' => 'AES-256-CBC',
+    'cipher' => 'AES-128-CBC', //aes-128-cbc
 
     /*
     |--------------------------------------------------------------------------
@@ -195,6 +195,8 @@ return [
          * Has to override the Collective\Html\HtmlServiceProvider form singleton
          */
         // App\Providers\MacroServiceProvider::class,
+        Creativeorange\Gravatar\GravatarServiceProvider::class
+
     ],
 
     /*
@@ -250,5 +252,6 @@ return [
         'Gravatar'    => Creativeorange\Gravatar\Facades\Gravatar::class,
         'Html'        => Collective\Html\HtmlFacade::class,
         'Socialite'   => Laravel\Socialite\Facades\Socialite::class,
+        'Gravatar' => Creativeorange\Gravatar\Facades\Gravatar::class,
     ],
 ];

@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Frontend\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Resume;
-use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class DashboardController
@@ -19,10 +20,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $downloads = DB::table('downloadpdf')->get();
-            
-            return view('frontend.user.dashboard',compact('downloads'))->withUser(access()->user());
-    }
+        $user = Auth::user();
+        $downloads = DB::table('downloadpdf')->where('user_id', $user->id)->get();
+        $resume = Resume::where('email', $user->email)->get();
 
-    
+        return view('frontend.user.dashboard', compact(
+            'downloads',
+            'user',
+            'resume'
+        ));
+    }
 }

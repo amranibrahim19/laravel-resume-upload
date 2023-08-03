@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Frontend\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\User\UpdateProfileRequest;
+use App\Models\Access\User\User;
 use App\Repositories\Frontend\Access\User\UserRepositoryContract;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class ProfileController
@@ -17,8 +20,10 @@ class ProfileController extends Controller
      */
     public function edit()
     {
-        return view('frontend.user.profile.edit')
-            ->withUser(access()->user());
+        $user = Auth::user();
+        return view('frontend.user.profile.edit', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -26,9 +31,14 @@ class ProfileController extends Controller
      * @param  UpdateProfileRequest $request
      * @return mixed
      */
-    public function update(UserRepositoryContract $user, UpdateProfileRequest $request)
+    public function update(UserRepositoryContract $user, Request $request)
     {
-        $user->updateProfile(access()->id(), $request->all());
-        return redirect()->route('frontend.user.dashboard')->withFlashSuccess(trans('strings.frontend.user.profile_updated'));
+
+        User::where('email', $request->email)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        return redirect()->route('frontend.user.dashboard')->with('succes', 'Successfully Updated');
     }
 }

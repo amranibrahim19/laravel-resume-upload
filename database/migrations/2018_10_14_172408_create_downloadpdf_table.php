@@ -15,16 +15,8 @@ class CreateDownloadpdfTable extends Migration
     {
         Schema::create('downloadpdf', function (Blueprint $table) {
             $table->increments('id');
-            
-            $table->string('name');               
-            $table->string('phone');           
-            $table->string('address');       
-            $table->boolean('gender');           
-            $table->string('state'); 
-            $table->string('file');           
-            $table->string('postcode');
-            $table->string('date_of_birth'); 
-            $table->timestamps(); 
+            $table->bigInteger('user_id');
+            $table->timestamps();
         });
     }
 

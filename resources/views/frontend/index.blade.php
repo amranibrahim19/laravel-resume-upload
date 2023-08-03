@@ -22,6 +22,10 @@
                 <div class="form-group">
                     <input type="text" name="name" id="name" class="form-control" placeholder="Name" required>
                 </div>
+                <label>Email*</label>
+                <div class="form-group">
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
+                </div>
                 <label>Phone Number*</label>
                 <div class="form-group">
                     <input type="text" name="phone" id="phone" class="form-control" placeholder="Phone Number" required>

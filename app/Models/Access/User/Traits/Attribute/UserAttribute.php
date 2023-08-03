@@ -2,6 +2,8 @@
 
 namespace App\Models\Access\User\Traits\Attribute;
 
+use Creativeorange\Gravatar\Facades\Gravatar;
+
 /**
  * Class UserAttribute
  * @package App\Models\Access\User\Traits\Attribute
@@ -50,7 +52,8 @@ trait UserAttribute
     public function getPicture($size = false)
     {
         if (! $size) $size = config('gravatar.default.size');
-        return gravatar()->get($this->email, ['size' => $size]);
+        // return gravatar()->get($this->email, ['size' => $size]);
+        Gravatar::get($this->email, ['size' => $size]);
     }
 
     /**

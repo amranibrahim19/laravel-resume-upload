@@ -37,6 +37,7 @@ class FrontendController extends Controller
                 $data = Resume::create([
                     'name' => $request->name,
                     'phone' => $request->phone,
+                    'email' => $request->email,
                     'address' => $request->address,
                     'gender' => $request->gender,
                     'state' => $request->state,
@@ -48,7 +49,7 @@ class FrontendController extends Controller
                 return redirect("/")->withFlashSuccess("Your Resume has been submitted successfully");
             }
         } catch (\Throwable $th) {
-            return redirect()->back()->withInput()->withError("Error Saving file, Please check file and try again");
+            return redirect()->back()->withFlashDanger("Error Saving file, Please check file and try again");
         }
     }
 

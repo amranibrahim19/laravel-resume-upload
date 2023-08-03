@@ -9,7 +9,7 @@
         "arcanedev/log-viewer": "*",
         "automattic/woocommerce": "^3.1",
         "codexshaper/laravel-woocommerce": "^3.0",
-        "creativeorange/gravatar": "*",
+        "creativeorange/gravatar": "^1.0",
         "davejamesmiller/laravel-breadcrumbs": "5.x",
         "guzzlehttp/guzzle": "^7.7",
         "hieu-le/active": "*",

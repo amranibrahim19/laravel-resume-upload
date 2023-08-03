@@ -10,7 +10,9 @@ use App\Http\Controllers\Frontend\User\DashboardController;
 use App\Http\Controllers\Frontend\User\ProfileController;
 use App\Http\Controllers\Language\LanguageController;
 use Arcanedev\LogViewer\Http\Controllers\LogViewerController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 // Route::get('/login', [FrontendController::class, 'login'])->name('frontend.login');
 
@@ -47,10 +49,22 @@ Route::group(['middleware' => 'web'], function () {
             Route::group(['namespace' => 'User'], function () {
                 Route::get('dashboard', [DashboardController::class, 'index'])->name('frontend.user.dashboard');
                 Route::get('profile/edit',  [ProfileController::class, 'edit'])->name('frontend.user.profile.edit');
-                Route::patch('profile/update', [ProfileController::class, 'update'])->name('frontend.user.profile.update');
+                Route::post('profile/update', [ProfileController::class, 'update'])->name('frontend.user.profile.update');
             });
         });
+
+        Route::get('update/password', function () {
+            return "User Can Update Password";
+        })->name('auth.password.change');
     });
+
+    Route::get('logout', function () {
+        Session::flush();
+
+        Auth::logout();
+
+        return redirect('/');
+    })->name('auth.logout');
 });
 
 /**

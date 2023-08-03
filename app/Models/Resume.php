@@ -13,6 +13,7 @@ class Resume extends Model
     protected $fillable = [
         'name',
         'phone',
+        'email',
         'address',
         'gender',
         'state',

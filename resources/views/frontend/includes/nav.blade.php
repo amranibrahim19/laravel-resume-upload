@@ -41,17 +41,24 @@
                     </a>
 
                     <ul class="dropdown-menu" role="menu">
-                        <li>{!! link_to_route('frontend.user.dashboard', trans('navs.frontend.dashboard')) !!}</li>
+                        <li>
+                            <a href="{{route('frontend.user.dashboard')}}" class="@yield('navs.frontend.dashboard')">Dashboard</a>
+                        </li>
 
-                        @if (access()->user()->canChangePassword())
-                        <li>{!! link_to_route('auth.password.change', trans('navs.frontend.user.change_password')) !!}</li>
+                        @if(Auth::user()->canChangePassword())
+                        <li>
+                            <a href="{{route('auth.password.change')}}" class="@yield('navs.frontend.user.change_password')">Change Password</a>
+                        </li>
                         @endif
 
-                        @permission(('view-backend'))
-                        <li>{!! link_to_route('admin.dashboard', trans('navs.frontend.user.administration')) !!}</li>
-                        @endauth
+                        <!-- if user can view admin || new permission -->
+                        <li>
+                            <a href="{{route('admin.dashboard')}}" class="@yield('navs.frontend.user.administration')">Admin Dashboard</a>
+                        </li>
 
-                        <li>{!! link_to_route('auth.logout', trans('navs.general.logout')) !!}</li>
+                        <li>
+                            <a href="{{route('auth.logout')}}" class="@yield('navs.general.logout')">Logout</a>
+                        </li>
                     </ul>
                 </li>
                 @endif
