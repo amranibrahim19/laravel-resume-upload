@@ -5,101 +5,140 @@
 
     <div class="col-md-10 col-md-offset-1">
 
-        <div class="panel panel-default">
-            <div class="panel-heading">{{ trans('navs.frontend.dashboard') }}</div>
+        <div class="card">
+            <div class="card-header">{{ trans('navs.frontend.dashboard') }}</div>
 
-            <div class="panel-body">
-                <div role="tabpanel">
+            <div class="card-body">
 
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active">
-                            <a href="#resumes" aria-controls="resumes" role="tab" data-toggle="tab">All Resumes</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">{{ trans('navs.frontend.user.my_information') }}</a>
-                        </li>
-                    </ul>
+                <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="ex1-tab-1" data-bs-toggle="tab" href="#ex1-tabs-1" role="tab" aria-controls="ex1-tabs-1" aria-selected="true">
+                            All Resumes
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="ex1-tab-2" data-bs-toggle="tab" href="#ex1-tabs-2" role="tab" aria-controls="ex1-tabs-2" aria-selected="false">
+                            My Information
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="ex1-tab-3" data-bs-toggle="tab" href="#ex1-tabs-3" role="tab" aria-controls="ex1-tabs-3" aria-selected="false">
+                            My Download
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="ex1-content">
+                    <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                        <table class="table table-bordered">
+                            <thead>
+                                <th>Title</th>
+                                <th>Upload Date</th>
+                                <th>Action</th>
+                            </thead>
 
-                    <div class="tab-content">
+                            <tbody>
 
-                        <div class="tab-pane active" role="tabpanel" id="resumes">
-
-
-                            <table class="table table-bordered">
-                                <thead>
-                                    <th>Title</th>
-                                    <th>Upload Date</th>
-                                    <th>Action</th>
-                                </thead>
-
-                                <tbody>
-
-                                    @foreach($resume as $data)
-                                    <tr>
-                                        <td>{{$data->name}}</td>
-                                        <td>{{$data->created_at}}</td>
-                                        <td>
-                                            <a href="{{$data->file}}" download="{{$data->file}}">
-
-                                                <button type="button" class="btn btn-primary">
-                                                    <i class="fa-solid fa-download"></i>
-                                                    Download
-                                                </button>
-                                            </a>
-                                            <a href="{{$data->file}}" download="{{$data->file }}"> <button type="button" class="btn btn-primary">Dowanload</button></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div role="tabpanel" class="tab-pane" id="profile">
-                            <table class="table table-striped table-hover table-bordered dashboard-table">
+                                @foreach($resume as $data)
                                 <tr>
-                                    <th>{{ trans('labels.frontend.user.profile.avatar') }}</th>
-                                    <td><img src="{!! $user->picture !!}" class="user-profile-image" /></td>
-                                </tr>
-                                <tr>
-                                    <th>{{ trans('labels.frontend.user.profile.name') }}</th>
-                                    <td>{!! $user->name !!}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ trans('labels.frontend.user.profile.email') }}</th>
-                                    <td>{!! $user->email !!}</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ trans('labels.frontend.user.profile.created_at') }}</th>
-                                    <td>{!! $user->created_at !!} ({!! $user->created_at->diffForHumans() !!})</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ trans('labels.frontend.user.profile.last_updated') }}</th>
-                                    <td>{!! $user->updated_at !!} ({!! $user->updated_at->diffForHumans() !!})</td>
-                                </tr>
-                                <tr>
-                                    <th>{{ trans('labels.general.actions') }}</th>
                                     <td>
-                                        <a href="{!! route('frontend.user.profile.edit') !!}" class="btn btn-primary btn-xs">{{ trans('labels.frontend.user.profile.edit_information') }}</a>
+                                        <input type="text" name="id" id="id" value="{{$data->id}}">
+                                    </td>
+                                    <td>{{$data->name}}</td>
+                                    <td>{{$data->created_at}}</td>
+                                    <td>
+                                        <!-- <a href="{{$data->file}}" download="{{$data->file}}">
 
-                                        @if ($user->canChangePassword())
-                                        <a href="{!! route('auth.password.change') !!}" class="btn btn-warning btn-xs">{{ trans('navs.frontend.user.change_password') }}</a>
-                                        @endif
+                                            <button type="button" class="btn btn-primary">
+                                                <i class="fa-solid fa-download"></i>
+                                                Download
+                                            </button>
+                                        </a> -->
+
+                                        <a href="{{route('frontend.user.download')}}">
+
+                                            <button type="button" class="btn btn-primary">
+                                                <i class="fa-solid fa-download"></i>
+                                                Download
+                                            </button>
+                                        </a>
                                     </td>
                                 </tr>
-                            </table>
-                        </div><!--tab panel profile-->
+                                @endforeach
 
-                    </div><!--tab content-->
+                            </tbody>
+                        </table>
+                    </div>
 
-                </div><!--tab panel-->
+                    <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                        <table class="table table-striped table-hover table-bordered dashboard-table">
+                            <tr>
+                                <th>{{ trans('labels.frontend.user.profile.avatar') }}</th>
+                                <td><img src="{!! $user->picture !!}" class="user-profile-image" /></td>
+                            </tr>
+                            <tr>
+                                <th>{{ trans('labels.frontend.user.profile.name') }}</th>
+                                <td>{!! $user->name !!}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ trans('labels.frontend.user.profile.email') }}</th>
+                                <td>{!! $user->email !!}</td>
+                            </tr>
+                            <tr>
+                                <th>{{ trans('labels.frontend.user.profile.created_at') }}</th>
+                                <td>{!! $user->created_at !!} ({!! $user->created_at->diffForHumans() !!})</td>
+                            </tr>
+                            <tr>
+                                <th>{{ trans('labels.frontend.user.profile.last_updated') }}</th>
+                                <td>{!! $user->updated_at !!} ({!! $user->updated_at->diffForHumans() !!})</td>
+                            </tr>
+                            <tr>
+                                <th>{{ trans('labels.general.actions') }}</th>
+                                <td>
+                                    <a href="{!! route('frontend.user.profile.edit') !!}" class="btn btn-primary btn-xs">{{ trans('labels.frontend.user.profile.edit_information') }}</a>
 
-            </div><!--panel body-->
+                                    @if ($user->canChangePassword())
+                                    <a href="{!! route('auth.password.change') !!}" class="btn btn-warning btn-xs">{{ trans('navs.frontend.user.change_password') }}</a>
+                                    @endif
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+                        <table class="table table-bordered">
+                            <thead>
+                                <th>No.</th>
+                                <th>Download Date</th>
+                                <!-- <th>Action</th> -->
+                            </thead>
 
-        </div><!-- panel -->
+                            <tbody>
 
-    </div><!-- col-md-10 -->
+                                @foreach($resume as $data)
+                                <tr>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$data->created_at}}</td>
+                                    <!-- <td>
+                                        <a href="{{$data->file}}" download="{{$data->file}}">
 
-</div><!-- row -->
+                                            <button type="button" class="btn btn-primary">
+                                                <i class="fa-solid fa-download"></i>
+                                                Download
+                                            </button>
+                                        </a>
+                                    </td> -->
+                                </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 @endsection

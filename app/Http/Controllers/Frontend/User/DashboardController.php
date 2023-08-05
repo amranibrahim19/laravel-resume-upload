@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\Resume;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -29,5 +31,15 @@ class DashboardController extends Controller
             'user',
             'resume'
         ));
+    }
+
+    public function download(Request $request)
+    {
+
+        dd($request->all());
+        // $user = Auth::user();
+        // $resume = Resume::where('email', $user->email)->get();
+
+        // return Response::download($resume->file);
     }
 }

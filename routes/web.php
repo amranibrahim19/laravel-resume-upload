@@ -50,6 +50,8 @@ Route::group(['middleware' => 'web'], function () {
                 Route::get('dashboard', [DashboardController::class, 'index'])->name('frontend.user.dashboard');
                 Route::get('profile/edit',  [ProfileController::class, 'edit'])->name('frontend.user.profile.edit');
                 Route::post('profile/update', [ProfileController::class, 'update'])->name('frontend.user.profile.update');
+
+                Route::get('downloads', [DashboardController::class, 'download'])->name('frontend.user.download');
             });
         });
 
